@@ -1,0 +1,45 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/draft_database
+    username: yassine
+    driver-class-name: org.postgresql.Driver
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  mail:
+    host: ${EMAIL_HOSTNAME}
+    port: 465
+    username: ${EMAIL_USER_NAME}
+    password: ${EMAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+            trust: "*"
+          starttls:
+            enabled: true
+    protocol: smtp
+application:
+  security:
+    jwt:
+      secret-key: ee38f3e5cd0da7cfddf06edfa8dae4502c2d1c23ad70466c9093380ec9293ee9
+      expiration: 86400000
+  mailing:
+    frontend:
+      activation-url: http://localhost:4200/activate-account
+  file:
+    uploads:
+      output-photos-folder: ./uploads
+  cors:
+    origins: http://localhost:4200,http://localhost:8080,http://vps_ip:8080,http://vps_ip:8088
+server:
+  port: 8088

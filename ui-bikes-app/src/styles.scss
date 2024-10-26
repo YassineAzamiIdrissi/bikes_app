@@ -1,0 +1,64 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "ngx-toastr/toastr";
+
+.form-container {
+  width: 800px !important;
+  margin-top: 10% !important;
+  margin-inline: auto;
+}
+
+.icon {
+  width: 25px;
+}
+
+.md-icon {
+  width: 45px;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.loader-layer {
+  height: 60vh;
+  width: 60vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.width-fit-content {
+  width: fit-content;
+  position: relative;
+}
+
+.red-mark {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: red;
+  position: absolute;
+  top: 0;
+  right: -10px;
+}
+
+.custom-drop {
+  background-color: gray;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  width: 150%;
+  border-radius: 10px;
+}
+
+.notif {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}

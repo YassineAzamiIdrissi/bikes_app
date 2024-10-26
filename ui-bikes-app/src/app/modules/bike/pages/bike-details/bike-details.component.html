@@ -1,0 +1,61 @@
+<div class="alert alert-success" role="alert"
+     *ngIf="actionMessage && actionWitness">
+  <p class="m-0 p-0">{{ actionMessage }}</p>
+</div>
+<div class="alert alert-danger" role="alert" *ngIf="actionMessage && !actionWitness">
+  <p class="m-0 p-0">{{ actionMessage }}</p>
+</div>
+<div class="card mb-3" style="width:1200px;margin:auto">
+  <img [src]="'data:image/jpg;base64, '+bike.picture" class="card-img-top"
+       alt="..."
+       style="height: 500px"
+       *ngIf="bike.picture"
+  >
+  <div class="card-body">
+    <div class="d-flex align-items-center justify-content-between">
+      <h5 class="card-title text-danger fw-bold fs-3">
+        <img src="/bicyclette.png" class="md-icon"> &nbsp;
+        <span class="text-dark">Bike - </span>
+        {{ bike.bikeName }}
+      </h5>
+      <div class="d-flex align-items-center mt-4 mb-4">
+        <app-rating [rating]="bike.rating || 0"></app-rating>
+      </div>
+    </div>
+    <div class="d-flex">
+      <h5 class="card-title text-warning fw-bold fs-4">
+        <img src="/utilisateur.png" class="md-icon"> &nbsp;
+        {{ bike.ownerName }}
+      </h5>
+    </div>
+    <p class="card-text fs-4 text-secondary">
+      <img src="/description.png" class="md-icon"> &nbsp;
+      {{ bike.description }}
+      &period;
+    </p>
+    <div class="d-flex align-items-center gap-2">
+      <img src="/identifiant.png" class="md-icon">
+      <h3 class="fs-4">{{ bike.techIdentifier }}</h3>
+    </div>
+    <div class="d-flex align-items-center gap-2 mt-4 mb-4"
+         *ngIf="bike.repairing">
+      <img src="/outils-de-reparation.png" class="md-icon">
+      <h4 class="text text-primary">
+        Under reparations for the moment...
+      </h4>
+    </div>
+    <div class="d-flex align-items-center gap-2 mt-4 mb-4"
+         *ngIf="!bike.repairing && !bike.borrowed">
+      <button class="btn btn-danger" (click)="addToFavorite()"
+              *ngIf="!bike.favorite"> Add to favorites
+      </button>
+      <button class="btn btn-primary" (click)="borrowBike()">Borrow</button>
+    </div>
+    <div class="d-flex align-items-center gap-2 mt-4" *ngIf="bike.borrowed">
+      <img src="/cocher.png" class="icon">
+      <h4 class="text text-primary">
+        Borrowed currently
+      </h4>
+    </div>
+  </div>
+</div>

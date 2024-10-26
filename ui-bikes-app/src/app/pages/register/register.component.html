@@ -1,0 +1,39 @@
+<form class="form-container border border-1 p-4 rounded-2">
+  <div class="alert alert-danger" *ngIf="validationErrors.length || errorMessage"
+       role="alert">
+    <p class="p-0 m-0" *ngFor="let error of validationErrors">
+      {{ error }}
+    </p>
+    <p class="p-0 m-0" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </p>
+  </div>
+  <div class="mb-3">
+    <label for="firstname" class="form-label">Firstname</label>
+    <input type="text" class="form-control" id="firstname"
+           name="register-fn" [(ngModel)]="registerRequest.firstname">
+  </div>
+  <div class="mb-3">
+    <label for="lastname" class="form-label">Lastname</label>
+    <input type="text" class="form-control" id="lastname"
+           name="register-ln" [(ngModel)]="registerRequest.lastname">
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+           name="register-email" [(ngModel)]="registerRequest.email">
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" class="form-control" id="password"
+           name="login-password" [(ngModel)]="registerRequest.password">
+  </div>
+  <button type="submit" (click)="register()" class="btn btn-primary">Submit
+  </button>
+  <div class="d-flex justify-content-between mt-3">
+    <button class="btn btn-link" href="javascript:void[0]"
+            (click)="moveToLogin()">
+      I already have an account
+    </button>
+  </div>
+</form>

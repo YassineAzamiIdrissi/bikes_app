@@ -1,0 +1,59 @@
+<div class="d-flex gap-2">
+  <div class="col-3">
+    <img
+      [src]="selectedPic || 'https://thumbs.dreamstime.com/b/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available-236105299.jpg'"
+      height="100%"
+      width="100%"
+    />
+    <div class="mb-3 mt-3">
+      <input class="form-control" type="file" id="formFileDisabled"
+             (change)="setFile($event)">
+    </div>
+  </div>
+  <form class="col-9 p-3">
+    <div class="alert alert-danger mt-3 mb-3" role="alert" *ngIf="validationErrors.length">
+      <p class="m-0 p-0" *ngFor="let error of validationErrors">
+        {{ error }}
+      </p>
+    </div>
+    <h3 class="text-primary fw-bold">{{
+        bikeId ? "Update bike : " + staticBikeName : "Define your bike :"
+      }}</h3>
+    <div class="mb-3">
+      <label for="bikeName" class="form-label">The bike name</label>
+      <input type="text" class="form-control" id="bikeName"
+             [(ngModel)]="bikeRequest.bikeName"
+             name="bikeName"
+      >
+    </div>
+    <div class="mb-3">
+      <label for="bikeIdentifier" class="form-label">Tech Identifier</label>
+      <input type="text" class="form-control" id="bikeIdentifier"
+             [(ngModel)]="bikeRequest.techIdentifier"
+             name="bikeTechId"
+      >
+    </div>
+    <div class="mb-3">
+      <label for="bikeDesc" class="form-label">Bike description</label>
+      <textarea rows="5" class="form-control" id="bikeDesc"
+                [(ngModel)]="bikeRequest.description"
+                name="bikeDesc"></textarea>
+    </div>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="shareable"
+             [(ngModel)]="bikeRequest.shareable"
+             name="bikeShare">
+      <label class="form-check-label" for="shareable">Initially Shareable</label>
+    </div>
+    <div class="d-flex gap-4">
+      <button type="submit" class="btn btn-success"
+              (click)="saveBike()">{{
+          this.bikeId ? "Update" : "Add"
+        }}
+      </button>
+      <button type="button" class="btn btn-warning" (click)="resetData()">
+        Reset
+      </button>
+    </div>
+  </form>
+</div>

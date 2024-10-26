@@ -1,0 +1,28 @@
+<form class="d-flex flex-column
+ align-items-center
+ justify-content-center
+ m-auto border border-1 mt-3
+ rounded-5"
+      style="width: 500px; height: 500px">
+  <div class="mb-3">
+    <div class="alert alert-danger"
+         *ngIf="errorMessage" role="alert">
+      <p>{{ errorMessage }}</p>
+    </div>
+    <div class="d-flex align-items-center justify-content-center mb-3">
+      <h4 class="text text-danger">Recover your forgotten password</h4>
+    </div>
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1"
+           aria-describedby="emailHelp"
+           [(ngModel)]="email"
+           name="recover-email"
+    >
+    <div id="emailHelp" class="form-text">We'll send an email to recover
+      your password
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary"
+          (click)="sendEmail()">send
+  </button>
+</form>

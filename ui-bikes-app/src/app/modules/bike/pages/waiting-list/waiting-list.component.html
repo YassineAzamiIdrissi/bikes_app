@@ -1,0 +1,35 @@
+<h3 class="text-primary">Your returns list</h3>
+<div class="alert alert-success" role="alert"
+     *ngIf="actionWitness && actionMessage">
+  {{ actionMessage }}
+</div>
+<div class="alert alert-danger" role="alert"
+     *ngIf="!actionWitness && actionMessage">
+  {{ actionMessage }}
+</div>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Tech Identifier</th>
+    <th scope="col">Bike</th>
+    <th scope="col">Borrowed by</th>
+    <th scope="col">Borrow date</th>
+    <th scope="col">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let bike of returnsPage.content"
+      [style]="bike.accepted ? 'table-success' : '' ">
+    <th scope="row">{{ bike.techIdentifier }}</th>
+    <td>{{ bike.bikeName }}</td>
+    <td>{{ bike.borrowedBy }}</td>
+    <td>{{ bike.borrowedDate }}</td>
+    <td class="d-flex gap-2 align-items-center" *ngIf="!bike.accepted">
+      <button class="btn btn-success" (click)="acceptReturn(bike)">Accept</button>
+    </td>
+    <td class="d-flex gap-2 align-items-center" *ngIf="bike.accepted">
+      <p class="center">Returned</p>
+    </td>
+  </tr>
+  </tbody>
+</table>

@@ -1,0 +1,5 @@
+<div class="d-flex align-items-center justify-content-start mb-2">
+  <p class="fw-bold" *ngIf="!own">{{ username }} : &nbsp; </p>
+  <p class="fw-bold text-success" *ngIf="own">{{ username }} (You) : &nbsp;</p>
+  <p>{{ comment }}</p>
+</div>

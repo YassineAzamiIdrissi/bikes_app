@@ -1,0 +1,93 @@
+<h3 class="text-primary">Borrowed bikes</h3>
+<table class="table" *ngIf="borrowedBikesPage.content?.length else nothing">
+  <thead>
+  <tr>
+    <th scope="col">Tech identifier</th>
+    <th scope="col">Bike name</th>
+    <th scope="col">Owner name</th>
+    <th scope="col">Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let bike of borrowedBikesPage.content">
+    <th scope="row">{{ bike.techIdentifier }}</th>
+    <td>{{ bike.bikeName }}</td>
+    <td>{{ bike.ownerName }}</td>
+    <td>
+      <button type="button" class="btn btn-primary"
+              data-bs-toggle="modal"
+              *ngIf="!bike.returned"
+              [attr.data-bs-target]="'#bikeFeedbackModal'+bike.id">
+        return
+      </button>
+      <span class="btn btn-warning"
+            *ngIf="bike.returned && !bike.accepted"
+      >
+          Pending..
+      </span>
+      <span class="btn btn-success"
+            *ngIf="bike.returned && bike.accepted">
+            Accepted by the owner
+      </span>
+    </td>
+    <div class="modal fade" [id]="'bikeFeedbackModal'+bike.id" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="text-primary">Your thoughts on
+              <span class="text-dark">{{ bike.bikeName }}</span>
+            </h3>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="customRange1" class="form-label">Rating</label>
+                <input type="range" class="form-range" id="customRange1"
+                       [(ngModel)]="mark" [name]="'rating'+bike.id"
+                       [min]="0"
+                       [max]="5"
+                       [step]="0.5"
+                >
+                <app-rating [rating]="mark"></app-rating>
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Comment:</label>
+                <textarea class="form-control" id="message-text"
+                          style="resize: none"
+                          [(ngModel)]="comment"
+                          [name]="'comment of '+bike.id"
+                          rows="5"></textarea>
+              </div>
+            </form>
+            <div class="alert alert-success" *ngIf="actionWitness && actionMessage">
+              {{
+                actionMessage
+              }}
+            </div>
+            <div class="alert alert-danger" *ngIf="!actionWitness && actionMessage">
+              {{
+                actionMessage
+              }}
+            </div>
+            <div class="alert alert-danger" *ngFor="let error of validationErrors">
+              <p class="p-0 m-0">
+                {{ error }}
+              </p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary"
+                    (click)="returnBike(bike)">Send
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </tr>
+  </tbody>
+</table>
+<ng-template #nothing>
+  <p class="fw-bold"> No bikes borrowed yet </p>
+</ng-template>

@@ -1,0 +1,38 @@
+<div class="d-flex gap-3 flex-wrap" *ngIf="timelineBikes.content?.length">
+  <app-bike-card *ngFor="let bike of timelineBikes.content"
+                 [bike]="bike"
+                 (borrow)="borrowBike($event)"
+                 (favorite)="favoriteBike($event)"
+                 [explicitDescription]="bike.description ? bike.description : ''"
+                 (details)="navigateToDetails($event)"
+  ></app-bike-card>
+</div>
+<div *ngIf="!timelineBikes.content?.length">
+  <p class="text text-primary">no bikes found for the moment</p>
+</div>
+<nav aria-label="Page navigation example" class="pagination-custom">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link"
+                             (click)="moveToFirst();"
+                             href="javascript:void[0]"
+                             [class.disabled]="page == 0">First</a></li>
+    <li class="page-item"><a class="page-link"
+                             aria-label="Previous"
+                             (click)="moveToPrevious()"
+                             [class.disabled]="page == 0"
+                             href="javascript:void[0]">Previous</a></li>
+    <li class="page-item" *ngFor="let _ of [].constructor(timelineBikes.totalPages);
+let i = index; "><a class="page-link"
+                    href="javascript:void[0]"
+                    [class.active]="page == i"
+                    (click)="moveToPage(i)">{{ i + 1 }}</a></li>
+    <li class="page-item"><a class="page-link"
+                             (click)="moveToNext()"
+                             [class.disabled]="timelineBikes.last"
+                             href="javascript:void[0]">Next</a></li>
+    <li class="page-item"><a class="page-link"
+                             (click)="moveToLast()"
+                             [class.disabled]="timelineBikes.last"
+                             href="javascript:void[0]">Last</a></li>
+  </ul>
+</nav>

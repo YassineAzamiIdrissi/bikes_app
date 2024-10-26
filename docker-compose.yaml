@@ -1,0 +1,52 @@
+services:
+  mail-dev:
+    container_name: mail-dev-cont
+    image: maildev/maildev
+    networks:
+      - spring-demo
+    ports:
+      - 1080:1080
+      - 1025:1025
+    restart: unless-stopped
+  storing-service:
+    container_name: postgres_cont
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: yassine
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: draft_database
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - postgres:/data/postgres
+    networks:
+      - spring-demo
+    restart: unless-stopped
+  bikes-api:
+    container_name: bikes_api
+    image: practice/practice1.0.3:latest
+    ports:
+      - 8088:8088
+    networks:
+      - spring-demo
+    depends_on:
+      - storing-service
+  bikes-ui:
+    container_name: bikes-ui
+    image: practice-ui/practice-ui
+    ports:
+      - 8080:80
+    networks:
+      - spring-demo
+    depends_on:
+      - bikes-api
+    restart: unless-stopped
+
+volumes:
+  postgres:
+    driver: local
+
+networks:
+  spring-demo:
+    driver: bridge

@@ -1,0 +1,22 @@
+<div class="d-flex align-items-center justify-content-end mb-3 mt-3">
+  <button class="btn btn-primary" routerLink="/bikes/bike-form">Add a new bike</button>
+</div>
+<div class="alert alert-success mt-3 mt-3" *ngIf="actionWitness && actionMessage" role="alert">
+  {{ actionMessage }}
+</div>
+<div class="alert alert-danger mt-3 mt-3" *ngIf="!actionMessage && actionMessage" role="alert">
+  {{ actionMessage }}
+</div>
+<div class="d-flex gap-3 flex-wrap" *ngIf="ownBikesPage?.content?.length">
+  <app-bike-card *ngFor="let bike of ownBikesPage.content"
+                 [bike]="bike"
+                 [manage]="true"
+                 [explicitDescription]="bike.description ? bike.description : ''"
+                 (share)="handleShare($event)"
+                 (repair)="handleRepair($event)"
+                 (edit)="handleEdit($event)"
+  ></app-bike-card>
+</div>
+<div class="d-flex gap-3 flex-wrap" *ngIf="!ownBikesPage?.content?.length">
+  <p class="fw-bold text-primary text-center">No bikes for the moment..</p>
+</div>

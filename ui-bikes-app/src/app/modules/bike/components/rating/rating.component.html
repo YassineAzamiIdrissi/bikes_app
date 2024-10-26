@@ -1,0 +1,10 @@
+<ng-container *ngFor="let _ of [].constructor(completeStars)">
+  <img src="/comp_star.png" class="icon clickable">
+</ng-container>
+<ng-container *ngIf="halfStars">
+  <img src="/uncomp_star.png" class="icon clickable">
+</ng-container>
+<ng-container *ngFor="let _ of [].constructor(emptyStars)">
+  <img src="/empty_star.png" class="icon clickable">
+</ng-container>
+

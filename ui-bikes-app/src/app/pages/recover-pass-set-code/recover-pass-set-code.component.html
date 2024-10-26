@@ -1,0 +1,38 @@
+<div class="d-flex flex-column
+ align-items-center
+ justify-content-center
+ m-auto border border-1 mt-3
+ rounded-5" *ngIf="error.length && submitted"
+     style="width: 500px; height: 500px">
+  <p class="text-center text-danger">
+    {{ error }}
+  </p>
+  <button class="btn btn-warning"
+          (click)="submitted = false">
+    try again
+  </button>
+</div>
+<form class="d-flex flex-column
+ align-items-center
+ justify-content-center
+ m-auto border border-1 mt-3
+ rounded-5"
+      *ngIf="!submitted"
+      style="width: 500px; height: 500px">
+  <div class="mb-3">
+    <div class="alert alert-danger"
+         *ngIf="false" role="alert">
+    </div>
+    <h4 class="text-center text-primary fs-5">we sent an email to {{
+        email
+      }}</h4>
+    <label for="recovery-code" class="form-label fw-bold">Write recovery code : </label>
+    <input type="text" class="form-control" id="recovery-code"
+           [(ngModel)]="code"
+           name="code-recovery"
+    >
+  </div>
+  <button type="submit" class="btn btn-primary"
+          (click)="verifyCode()">send
+  </button>
+</form>

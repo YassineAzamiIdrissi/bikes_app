@@ -1,0 +1,45 @@
+--> Start with the base entity class.
+--> GO for entities : Book - Feedback - history.
+--> Relationships time :
+    *One to many between a book and a user.
+    *One to many between a book and history.
+    *One to many between a user and history.
+    *One to many a book and a feedback.
+--> implementing the ApplicationAuditAware class in the beans folder :
+*this latter will serve us to look after the logic of createdBy and
+lastModifiedBy
+attributes.. it must implement the interface AuditorAware<Integer>.
+Integer here stands for the type of the User Id
+(the entity that will modify the thing).
+*then define a bean of this type in the beans configuration class.
+*once done consider modifying something at the level of the main class.
+[auditorAwareRef = "name_of_the_auditor_aware_bean"]
+--> Coding the BookRequest and response as well as the BookMapper :
+* the book request is a record.. but the book response is a class maybe it will
+contain a logic somewhere..
+* once you create the book Response.. we will just after create a method that is
+capable of returning the average of ratings based on the feedBacks array...
+
+--> defining the book repository..
+--> working on the bookService and the book Controller (in a parallel way..) :
+*don't forget to add the @Tag annotation.. so that the controller became a
+service in Angular (Swagger.. ). as well as the RequestPath annotation
+to unify the prefix of the controller endpoints..
+
+--> Time to pagination :
+* we implement a generic class PageResponse<T>.
+* the pagination is a concept that allow us to limit the number of returned
+lines by our jpql request.. and this functionality is specified by an object
+called Pageable.
+* this pageable object is accessible to all the selection methods find...
+
+--> another technic : specification technic
+* we will implement a BookSpecification class that doesn't
+extends or implement anything all what it is for is possessing a static
+method that is capable to build a specification.
+* once done.. go the the entity REPOSITORY that is concerned by
+this specification and extends SpecificationExecutor<Book>
+* so from now on.. all the "find" methods can take an object of this spec.
+
+
+
